@@ -491,6 +491,15 @@
 
   var qIndex = 0;
 
+  function shuffled(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
   function renderQuestion() {
     var q = CONFIG.questions[qIndex];
     buildLadder(qIndex);
@@ -501,7 +510,7 @@
     $("qReaction").classList.remove("show");
     $("qReaction").textContent = "";
 
-    q.options.forEach(function (label) {
+    shuffled(q.options).forEach(function (label) {
       var b = document.createElement("button");
       b.type = "button";
       b.className = "opt";
